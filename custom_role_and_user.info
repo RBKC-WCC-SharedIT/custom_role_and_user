@@ -1,0 +1,6 @@
+name = Custom role and user
+description = Creates custom role and user using code
+core = 7.x
+files[] = custom_role_and_user.install
+files[] = custom_role_and_user.module
+
