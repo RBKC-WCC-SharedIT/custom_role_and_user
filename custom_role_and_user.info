@@ -1,0 +1,8 @@
+name = Custom role and user
+description = Creates custom role and user using code
+core = 7.x
+version = v0.1.0
+package = RBKC
+files[] = custom_role_and_user.install
+files[] = custom_role_and_user.module
+

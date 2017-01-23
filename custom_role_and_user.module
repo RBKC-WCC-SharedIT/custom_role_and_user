@@ -1,0 +1,85 @@
+<?php
+
+/**
+ * @file Code for creating role and user.
+ *
+ */
+
+/**
+ * Creates role developer.
+ *
+ * @param string $name.
+ *    Name of role.
+ * @return array
+ *    Role $name
+ */
+function create_role($name) {
+  $role_name = array($name);
+
+  $existing_role = user_role_load_by_name($role_name);
+  if (empty($existing_role)) {
+    $role = new stdClass();
+    $role->name = $name;
+    user_role_save($role);
+    return user_role_load_by_name($name);
+  }
+  else {
+    return $existing_role;
+  }
+
+}
+
+/**
+ * Assigns user 1 permissions to role
+ * @params array $role
+ *    Role to which permissions are to be added.
+ */
+function assign_user_1_permissions_to_role($role) {
+  user_role_grant_permissions($role->rid, array_keys(module_invoke_all('permission')));
+}
+
+/**
+ * Creates user.
+ * @param string $name
+ *    Name of user
+ * @param string $password
+ *    Password of user
+ * @param string $email
+ *    Email address of user.
+ */
+ function create_user($name, $password, $email) {
+  //Get role id.
+  $role_id = $role->rid;
+  $role_name = $role->name;
+  $new_user = array(
+      'name' => $name,
+      'pass' => $pass,
+      'email' => $email,
+      'status' => 1,
+      'roles' => array(
+        DRUPAL_AUTHENTICATED_RID => 'authenticated user',
+        ),
+      'init' => $email,
+    );
+
+  user_save('', $new_user);
+ }
+
+ /**
+  * Adds custom role to user
+  * @param string $user_name
+  *   User name of user
+  * @param string $role_name
+  *   Custom role name
+  */
+ function add_custom_role_to_user($user_name, $role_name) {
+    $user = user_load_by_name($user_name);
+    $role = user_role_load_by_name($role_name);
+    $uid = $user->uid;
+    $rid = $role->rid;
+    user_multiple_role_edit(array($uid), 'add_role', $rid );
+ }
+
+
+
+
