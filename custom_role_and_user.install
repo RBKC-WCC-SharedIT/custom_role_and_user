@@ -8,9 +8,6 @@
  * Implements hook_install()
  */
 function custom_role_and_user_install() {
-  //create role and assign all permissions to it.
-  $role = create_role('developer');
-  assign_user_1_permissions_to_role($role);
-  create_user('rbkc-dev', 'password', 'rbkc-dev@example.com', 'developer');
-  add_custom_role_to_user('rbkc-dev', 'developer');
+  //create  developer role and assign test-dev all permissions to it.
+  custom_role_and_user_add_custom_role_and_user()
 }
