@@ -100,13 +100,16 @@ function assign_user_1_permissions_to_role($role) {
  * @see hook_add_custom_role_and_user()
  */
 
-function add_custom_role_and_user ($role_name, $user_name, $password, $email, $permissions = array('all')) {
+function custom_role_and_user_add_custom_role_and_user ($role_name, $user_name, $password, $email, $permissions = array('all')) {
+
   $role = create_role($role_name, $permissions);
   assign_user_1_permissions_to_role($role);
   create_user($user_name, $password, $email);
   add_custom_role_to_user($user_name, $role_name);
 
 }
+
+
 
 
 
